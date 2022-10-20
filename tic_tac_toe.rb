@@ -102,6 +102,7 @@ class Game < Board
     puts @num 
     # cambiar de jugador segun el número
     # @num no se lee desde acá 
+    # verificar posición en el tablero 
   end
 
 
