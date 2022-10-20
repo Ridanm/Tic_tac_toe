@@ -99,7 +99,8 @@ class Game < Board
 
   def change_player 
     puts @num 
-    # cambiar de jugador segun el número sea par o imp
+    # cambiar de jugador segun el número
+    # @num no se lee desde acá 
   end
 
 
