@@ -98,6 +98,7 @@ class Game < Board
   end
 
   def change_player 
+    # Usar argumento como @num para cambiar jugador 
     puts @num 
     # cambiar de jugador segun el número
     # @num no se lee desde acá 
