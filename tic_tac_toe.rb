@@ -59,7 +59,7 @@ class Player
   attr_accessor :letter
 
   def initialize
-    @data = {}
+    @data = []
   end
 
   def player_name
@@ -73,6 +73,7 @@ class Player
       @letter = gets.chomp 
     end
   end
+
 end
 
 
@@ -83,28 +84,29 @@ class Game < Board
     @player_one = player_one
     @player_two = player_two
     @board = Board::new 
+    @num = @board.board.size - 1
   end
 
-  def select_position! player 
-    @num = @board.board.size - 1
+  def select_position!
+    p @num
     @board.show_board
-    puts "@num = #{@num}"
+
     while @num > 0
-      puts "#{player.name.capitalize} select a free position in the board: "
+      change_player! @num
+      puts "#{@player.name.capitalize} select a free position in the board: "
       @position = gets.chomp.to_i 
-      verifier_free_position player
+      verifier_free_position @player
       @board.show_board 
     end
   end
 
-  def change_player 
-    # Usar argumento como @num para cambiar jugador 
-    puts @num 
-    # cambiar de jugador segun el número
-    # @num no se lee desde acá 
-    # verificar posición en el tablero 
+  def change_player! player
+    if player.odd?
+      @player = @player_one
+    else
+      @player = @player_two
+    end
   end
-
 
   def verifier_free_position player
       if @position.between?(1, 9) && @board.board[@position].class != ''.class 
@@ -116,8 +118,9 @@ class Game < Board
   end
 
   def winner
-
+    
   end
+
 end
 
 class Display
@@ -159,5 +162,5 @@ end
 
 # Comienza el juego 
 game = Game::new(player_one, player_two)
-#game.select_position!
-game.change_player
+game.select_position!
+#game.change_player!
