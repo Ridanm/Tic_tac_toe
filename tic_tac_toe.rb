@@ -59,7 +59,6 @@ class Player
   attr_accessor :letter
 
   def initialize
-    @data = []
   end
 
   def player_name
@@ -113,11 +112,11 @@ class Game < Board
         @board.board[@position] = player.letter  
         @num -= 1
       else 
-        puts "Casillero ocupado !!!"
+        puts "Thath position is occupied, or the character does not match..."
       end
   end
 
-  def winner
+  def winner 
     
   end
 
