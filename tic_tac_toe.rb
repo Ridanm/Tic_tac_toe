@@ -5,6 +5,7 @@
   # Mostrar tablero
 # clase Player
   # Ingrese el nombre del jugador numero 1 --- player_name 
+  # If name is empty enter name 
   # Elegir la letra con la que juega letra X o letra 0 --- chose_letter
   # Validar que la letra sea X o la O --- 
   # Ingrese el nombre del segundo jugador --- player_name
