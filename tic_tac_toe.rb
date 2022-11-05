@@ -54,9 +54,9 @@ class Player
   
   def choose_letter
     until @letter == 'x' || @letter == 'o'
-      print 'Enter the letter with which you will play => x <=, => o <= '
+      print "\nEnter the letter with which you will play => x <=, => o <= "
       @letter = gets.chomp 
-    end
+ p   end
   end
 end
   
@@ -73,20 +73,22 @@ class Game < Board
   end
   
   def select_position!
+    puts ""
     @board.show_board
-  
+
     while @num > 0
       change_player! @num
-      puts "#{@player.name.capitalize} select a free position in the board: "
+      puts "\n#{@player.name.capitalize} select a free position in the board: "
       @position = gets.chomp.to_i 
       check_free_position @player
+      puts ""
       @board.show_board 
 
       if winner @player 
-        puts "  ---  #{@player.name.capitalize} WIN!  ---"
+        puts "\n  ---  #{@player.name.capitalize} WIN!  ---"
         return 
       elsif board_full? @board 
-        puts "  ---  IS A DRAW!  ---"
+        puts "\n  ---  IS A DRAW!  ---"
         return 
       end
     end
@@ -105,7 +107,7 @@ class Game < Board
       @board.board[@position] = player.letter  
       @num -= 1
     else 
-      puts "Thath position is occupied, or the character does not match..."
+      puts "\nThath position is occupied, or the character does not match..."
     end
   end
   
