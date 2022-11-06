@@ -1,2 +1,2 @@
 # Tic_tac_toe
-Dos jugadores que deben lograr completar tres en línea
+Two players must achieve three in a row

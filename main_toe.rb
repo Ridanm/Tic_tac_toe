@@ -7,11 +7,11 @@ def play
 
   puts Info::WELCOME
 
-  puts "Player one !!!"
+  puts "\nPlayer one !!!"
   player_one.player_name 
   player_one.choose_letter
 
-  puts "Player two !!!"
+  puts "\nPlayer two !!!"
   player_two.player_name 
 
   if player_one.letter == 'x' 
@@ -30,7 +30,7 @@ def play_again
   if yes == 'yes'
     play 
   else
-    puts 'Thanks for playing'
+    puts "\nThanks for playing"
   end
   puts 
 end
