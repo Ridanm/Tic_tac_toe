@@ -6,11 +6,11 @@ player_two = Player::new
 
 puts Info::WELCOME
 
-puts "Player one !!!"
+puts "\nPlayer one !!!"
 player_one.player_name 
 player_one.choose_letter
 
-puts "Player two !!!"
+puts "\nPlayer two !!!"
 player_two.player_name 
 
 if player_one.letter == 'x' 
@@ -31,7 +31,7 @@ until result
     game.select_position!
     result = false 
   else 
-    puts 'Thanks for playing' 
+    puts 'Thanks for playing!!!' 
     result = true 
   end
 end

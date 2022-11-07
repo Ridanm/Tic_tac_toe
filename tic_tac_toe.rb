@@ -78,7 +78,7 @@ class Game < Board
 
     while @num > 0
       change_player! @num
-      puts "\n#{@player.name.capitalize} select a free position in the board: "
+      print "\n#{@player.name.capitalize} select a free position in the board: "
       @position = gets.chomp.to_i 
       check_free_position @player
       puts ""
