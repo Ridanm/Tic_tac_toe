@@ -7,6 +7,7 @@ end
   
 
 class Board 
+
   attr_reader :board
   
   def initialize
@@ -33,10 +34,12 @@ class Board
   def to_s 
     "#{@board}"
   end
+
 end
   
   
 class Player 
+
   attr_reader :name
   attr_accessor :letter
   
@@ -58,10 +61,12 @@ class Player
       @letter = gets.chomp 
  p   end
   end
+
 end
   
 
 class Game < Board 
+
   attr_reader :player_one, :player_two, :board, :num 
   include Info 
   
@@ -124,6 +129,7 @@ class Game < Board
   def to_s
     puts "#{@board}"
   end
+  
 end
   
   
