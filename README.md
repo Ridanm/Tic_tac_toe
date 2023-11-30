@@ -1,10 +1,14 @@
-Tic_tac_toe
-Two players must achieve three in a consecutive line, selecting the free positions on the board.
-_ The game ends when three in a row are achieved or the board is full.
+### Tic_tac_toe
+- https://replit.com/@ridanm/Tictactoe#main_toe.rb
 
-_ Dos jugadores deben lograr tres en una línea consecutiva, seleccionando las posiciones libres en el tablero.
-_ El juego termina cuando se logran tres en línea o el tablero esta completo.
+- Two players must achieve three in a consecutive line, selecting the free positions on the board.
+- The game ends when three in a row are achieved or the board is full.
 
-https://replit.com/@ridanm/Tictactoe#main_toe.rb
+- Spanish 
+- Seleccionando las posiciones libres en el tablero.
+- Dos jugadores deben lograr tres símbolos iguales en una línea consecutiva.
+- El juego termina cuando se logran tres en línea o el tablero esta completo.
+
+
 
 
