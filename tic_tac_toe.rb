@@ -7,7 +7,6 @@ end
   
 
 class Board 
-
   attr_reader :board
   
   def initialize
@@ -34,39 +33,30 @@ class Board
   def to_s 
     "#{@board}"
   end
-
 end
   
   
 class Player 
-
   attr_reader :name
   attr_accessor :letter
   
   def player_name
     print 'Enter your name: '
     @name = gets.chomp 
-    until_player_name
-  end
-
-  def until_player_name
-    if @name == ''
-      player_name 
-    end
+    player_name if @name == ''
+    @name 
   end
   
   def choose_letter
     until @letter == 'x' || @letter == 'o'
       print "\nEnter the letter with which you will play => x <=, => o <= "
       @letter = gets.chomp 
- p   end
+    end
   end
-
 end
   
 
 class Game < Board 
-
   attr_reader :player_one, :player_two, :board, :num 
   include Info 
   
@@ -129,7 +119,6 @@ class Game < Board
   def to_s
     puts "#{@board}"
   end
-  
 end
   
   
