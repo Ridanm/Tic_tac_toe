@@ -28,7 +28,4 @@ class Board
   end
 end
 
-board = Board.new 
-
-p board 
 
