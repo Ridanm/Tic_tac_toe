@@ -10,6 +10,7 @@ class Board
     (0..9).each do |let|
       @board << let
     end
+		@board 
   end
   
   def show_board
@@ -26,3 +27,8 @@ class Board
     "#{@board}"
   end
 end
+
+board = Board.new 
+
+p board 
+
