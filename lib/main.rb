@@ -1,4 +1,7 @@
-require './tic_tac_toe.rb'
+require './info.rb'
+require './player.rb'
+require './boar.rb'
+require './game.rb'
 require 'colorize'
 
 board = Board::new
