@@ -1,12 +1,8 @@
-require './info.rb'
-require './player.rb'
-require './boar.rb'
-require './game.rb'
-require 'colorize'
+require_relative 'dependencies'
 
 board = Board::new
-player_one = Player::new
-player_two = Player::new 
+player_one = Player.new
+player_two = Player.new 
 
 puts Info::WELCOME
 
@@ -28,8 +24,8 @@ game.select_position!
 
 result = false 
 until result 
-  print "\nPLAY AGAIN PRESS => yes or no: ".yellow
-  result = gets.chomp
+  print "\nPLAY AGAIN type => yes or any key to exit: ".yellow
+  result = gets.chomp.downcase
   if result == 'yes'
     game = Game::new(player_one, player_two)
     game.select_position!
