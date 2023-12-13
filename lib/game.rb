@@ -1,29 +1,31 @@
+require_relative './dependencies.rb'
+
 class Game < Board 
   attr_reader :player_one, :player_two, :board, :num 
   include Info 
-  
+   
   def initialize(player_one, player_two)
     @player_one = player_one
     @player_two = player_two
-    @board = Board::new
+    @board = Board.new
     @num = @board.board.size - 1
   end
   
   def select_position!
-    puts "\n#{@board.show_board}"
+    @board.show_board
 
     while @num > 0
       change_player! @num
       print "#{@player.name.capitalize.yellow} select a free position in the board: "
       @position = gets.chomp.to_i 
-      check_free_position @player
-      puts "\n#{@board.show_board }"
+      check_free_position @position
+      @board.show_board
       
       if winner @player 
-        puts "\n  ---  Congratulations #{@player.name.capitalize} is the winner!!!  ---".blue  
+        puts "\n  ---  Congratulations #{@player.name.capitalize} is the winner!!!  ---".light_green 
         return 
       elsif board_full? @board 
-        puts "\n  ---  Is a draw!!!  ---".ligth_green 
+        puts "\n  ---  Is a draw!!!  ---".light_green 
         return 
       end
     end
@@ -35,14 +37,15 @@ class Game < Board
     else
       @player = @player_two
     end
+    @player 
   end
   
-  def check_free_position player
-    if @position.between?(1, 9) && @board.board[@position].class != ''.class 
-      @board.board[@position] = player.letter  
+  def check_free_position box
+    if @board.board[box] == 'x' || @board.board[box] == 'o'
+      puts "\nThath position is occupied, or the character does not match...".light_red 
+    elsif box.between?(1, 9) && box.class == Integer
+      @board.board[box] = @player.letter
       @num -= 1
-    else 
-      puts "\nThath position is occupied, or the character does not match..."
     end
   end
   
