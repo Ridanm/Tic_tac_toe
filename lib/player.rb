@@ -13,7 +13,7 @@ class Player
     puts "\nEnter the letter you want to play with it can be: X or: O"
     @letter = gets.chomp.downcase
     choose_letter unless @letter == 'x' || @letter == 'o'
-    @letter
+    @letter 
   end
 end
   
