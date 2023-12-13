@@ -1,7 +1,11 @@
-require './lib/boar.rb'
+require './lib/board.rb'
 
 RSpec.describe Board do 
 	let(:board) { Board.new }  
+
+	it '#initialize' do 
+		expect(board.board).to be_a(Array)
+	end
 
 	it 'create #Board' do 
 		expect(board.create_board).to be_a(Array)
