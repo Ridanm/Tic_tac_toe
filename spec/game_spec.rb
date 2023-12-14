@@ -1,6 +1,4 @@
-require './lib/info.rb' 
-require './lib/game.rb'
-require './lib/board.rb'
+require 'dependencies' 
 
 RSpec.describe Game do 
 	let(:player_one) { double('Player', name: 'Player_one') }
@@ -42,4 +40,6 @@ RSpec.describe Game do
 			expect(@game.change_player!(2)).to eq(player_two)
 		end
 	end
+
+	context '#winner'
 end
