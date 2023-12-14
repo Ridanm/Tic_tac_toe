@@ -1,4 +1,4 @@
-require_relative './dependencies.rb'
+require_relative 'dependencies'
 
 class Game < Board 
   attr_reader :player_one, :player_two, :board, :num 
@@ -22,7 +22,7 @@ class Game < Board
       @board.show_board
       
       if winner @player 
-        puts "\n  ---  Congratulations #{@player.name.capitalize} is the winner!!!  ---".light_green 
+        puts "\n  ---  Congratulations #{@player.name.capitalize} is the winner!!!  ---".green 
         return 
       elsif board_full? @board 
         puts "\n  ---  Is a draw!!!  ---".light_green 
@@ -41,7 +41,7 @@ class Game < Board
   end
   
   def check_free_position box
-    if @board.board[box] == 'x' || @board.board[box] == 'o'
+    if @board.board[box] == 'x' || @board.board[box] == 'o' || !box.between?(1, 9)
       puts "\nThath position is occupied, or the character does not match...".light_red 
     elsif box.between?(1, 9) && box.class == Integer
       @board.board[box] = @player.letter
