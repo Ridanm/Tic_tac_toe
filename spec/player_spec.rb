@@ -1,6 +1,8 @@
-require 'tic_tac_toe.rb'
+require './lib/player.rb'
 
 describe Player do 
+	let(:player) { double('Player', letter: 'o') }
+
 	before :each do 
 		@player = Player.new 
 	end
@@ -13,6 +15,10 @@ describe Player do
 	it 'select letter to play' do 
 		allow(@player).to receive(:gets).and_return('x')
 		expect(@player.choose_letter).to eq('x')
+	end
+
+	it 'if the player change the letter' do 
+		expect(player.letter).to_not eq('x')
 	end
 end 
 
