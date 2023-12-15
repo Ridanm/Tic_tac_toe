@@ -16,33 +16,29 @@ class Game < Board
 
     while @num > 0
       change_player! @num
-      print "#{@player.name.capitalize.yellow} select a free position in the board: "
+      print Info::show('free_position', @player.name)
       @position = gets.chomp.to_i 
       check_free_position @position
       @board.show_board
       
       if winner @player 
-        puts "\n  ---  Congratulations #{@player.name.capitalize} is the winner!!!  ---".green 
+        puts Info::show('winner', @player.name) 
         return 
       elsif board_full? @board 
-        puts "\n  ---  Is a draw!!!  ---".light_green 
+        puts Info::show('draw') 
         return 
       end
     end
   end
   
   def change_player! player
-    if player.odd?
-      @player = @player_one
-    else
-      @player = @player_two
-    end
-    @player 
+      @player = @player_one if player.odd?
+      @player = @player_two if player.even? 
   end
   
   def check_free_position box
     if @board.board[box] == 'x' || @board.board[box] == 'o' || !box.between?(1, 9)
-      puts "\nThath position is occupied, or the character does not match...".light_red 
+      puts Info::show('filled')
     elsif box.between?(1, 9) && box.class == Integer
       @board.board[box] = @player.letter
       @num -= 1
