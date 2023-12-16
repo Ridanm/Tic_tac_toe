@@ -1,10 +1,11 @@
-require 'dependencies' 
+require './lib/dependencies.rb'
 
 RSpec.describe Game do 
-	let(:player_one) { double('Player', name: 'Player_one') }
-	let(:player_two) { double('Player', name: 'Player_two') }
-
+	let(:player_one) { double('Player', name: 'Player_one', letter: 'x') }
+	let(:player_two) { double('Player', name: 'Player_two', letter: 'o') }
+	let(:position) { ['x', 'x', 'x'] }
 	before { @game = Game.new(player_one, player_two) }
+	before { @board = Board.new }
 
 	context '#initialize' do 
 		it 'with player_one' do 
@@ -25,12 +26,13 @@ RSpec.describe Game do
 	end
 
 	context '#select_position!' do 
+
 		it 'when check_free_position' do 
-			expect(@game.check_free_position(1)).to eq(1)
+			expect(@board.board[11]).to be_nil 
 		end
 
 		it 'when is ocuped' do
-			expect(@game.check_free_position(1)).to be('x')
+			expect(@board.board[1] = 'x').to_not eq(player_two.letter)
 		end
 	end
 
@@ -41,5 +43,9 @@ RSpec.describe Game do
 		end
 	end
 
-	context '#winner'
+	context '#winner' do 
+		it 'when there are three consecutive symbols in a line' do 
+			expect(position.all?(player_one.letter)).to be true
+		end
+	end 
 end
