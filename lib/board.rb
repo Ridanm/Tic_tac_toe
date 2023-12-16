@@ -4,15 +4,7 @@ class Board
   attr_reader :board
   
   def initialize
-    @board = []
-    create_board
-  end
-  
-  def create_board
-    (0..9).each do |position|
-      @board << position
-    end
-		@board 
+    @board = (0..9).to_a
   end
   
   def show_board
