@@ -21,7 +21,7 @@ class Game < Board
       check_free_position @position
       @board.show_board
       
-      if winner @player 
+      if winner? CHECK_WINNER, @player 
         puts Info::show('winner', @player.name) 
         return 
       elsif board_full? @board 
@@ -40,14 +40,15 @@ class Game < Board
     if @board.board[box] == 'x' || @board.board[box] == 'o' || !box.between?(1, 9)
       puts Info::show('filled')
     elsif box.between?(1, 9) && box.class == Integer
-      @board.board[box] = @player.letter
+      @board.board[box] = @player.letter 
       @num -= 1
     end
   end
   
-  def winner player
-    CHECK_WINNER.any? do |line|
-      line.all? {|pos| @board.board[pos] == player.letter}
+  def winner? check, player
+    player =  player.letter
+    check.any? do |line|
+      line.all? {|pos| @board.board[pos] == player}
     end
   end
 
