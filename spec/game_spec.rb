@@ -37,8 +37,11 @@ RSpec.describe Game do
 	end
 
 	context '#change_player!' do 
-		it 'changes the current player based on the player number' do 
+		it 'the current player based on the player number' do 
 			expect(@game.player_one).to eq(player_one)
+		end
+
+		it 'the player number is even' do 
 			expect(@game.change_player!(2)).to eq(player_two)
 		end
 	end
@@ -47,5 +50,22 @@ RSpec.describe Game do
 		it 'when there are three consecutive symbols in a line' do 
 			expect(position.all?(player_one.letter)).to be true
 		end
+
+		it 'when the three letters are not consecutives' do 
+			expect(position.all?(player_two.letter)).to_not be true
+		end
 	end 
+
+	context '#board full' do 
+		it 'after 7 turns' do 
+			expect(@game.board_full?(@board)).to be false 
+		end
+
+		it 'after 9 turns all numbers in the board are letters' do 
+			9.times do 
+				
+			end
+			expect(@game.board_full?(@board))
+		end
+	end
 end
