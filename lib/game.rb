@@ -45,9 +45,9 @@ class Game < Board
     end
   end
   
-  def winner? check, player
+  def winner? check_array, player
     player =  player.letter
-    check.any? do |line|
+    check_array.any? do |line|
       line.all? {|pos| @board.board[pos] == player}
     end
   end
