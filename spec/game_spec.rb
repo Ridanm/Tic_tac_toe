@@ -58,14 +58,13 @@ RSpec.describe Game do
 
 	context '#board full' do 
 		it 'after 7 turns' do 
-			expect(@game.board_full?(@board)).to be false 
+			full = [0, '1', '2', '3', '4', '5', '6', '7', 8, 9]
+			expect(@game.board_full?(full)).to be false 
 		end
 
 		it 'after 9 turns all numbers in the board are letters' do 
-			9.times do 
-				
-			end
-			expect(@game.board_full?(@board))
+			full = [0, 'x', '0', 'x', '0', 'x', '0', 'x', 'x', 'x']
+			expect(@game.board_full?(full)).to be true 
 		end
 	end
 end
