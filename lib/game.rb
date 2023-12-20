@@ -24,7 +24,7 @@ class Game < Board
       if winner? CHECK_WINNER, @player 
         puts Info::show('winner', @player.name) 
         return 
-      elsif board_full? @board 
+      elsif board_full? @board.board
         puts Info::show('draw') 
         return 
       end
@@ -53,7 +53,7 @@ class Game < Board
   end
 
   def board_full? board 
-    (1..9).all? {|pos| board.board[pos].is_a?(String) }
+    board[1, 9].all? { |pos| pos.is_a?(String) }
   end
   
   def to_s
