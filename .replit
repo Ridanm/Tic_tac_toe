@@ -1,2 +1,2 @@
 language = "ruby"
-rub = "ruby lib/main.rb"
+rub = "ruby ./lib/main.rb"
