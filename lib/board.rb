@@ -16,8 +16,4 @@ class Board
     rows_for_display = row_positions.map(&row_for_display)
     puts "\n#{rows_for_display.join("\n" + row_separator + "\n")}\n\n"
   end
-  
-  def to_s 
-    "#{@board}"
-  end
 end
