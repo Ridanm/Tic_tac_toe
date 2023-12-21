@@ -7,11 +7,7 @@ RSpec.describe Board do
 		expect(board.board).to be_a(Array)
 	end
 
-	it 'create #Board' do 
-		expect(board.create_board).to be_a(Array)
+	it 'create board' do 
+		expect(board.board).to include(0..9)
   end
-
-	it 'when creating the board you must include the numbers 0 to 9' do 
-		expect(board.create_board).to include(0..9)
-	end
 end
