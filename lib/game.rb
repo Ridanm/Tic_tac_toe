@@ -55,8 +55,4 @@ class Game < Board
   def board_full? board 
     board[1, 9].all? { |pos| pos.is_a?(String) }
   end
-  
-  def to_s
-    puts "#{@board}"
-  end
 end
