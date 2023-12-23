@@ -1,2 +1,3 @@
 language = "ruby"
 run = "ruby lib/main.rb"
+entrypoint = "lib/main.rb"
