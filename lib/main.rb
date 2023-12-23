@@ -1,4 +1,5 @@
 require_relative 'dependencies.rb'
+require 'colorize'
 
 board = Board::new
 player_one = Player.new
