@@ -1,4 +1,4 @@
-require './dependencies.rb'
+require_relative 'dependencies.rb'
 
 board = Board::new
 player_one = Player.new
