@@ -14,10 +14,10 @@ class Board
     col_separator = ' | '.blue
     row_separator = '--+---+--'.blue
     label_for_position = ->(position) { @board_data[position] || position }
-    row_for_display = ->(row) { row.map(&label_for_position).join(col_separator) }
+    row_for_position = ->(row) { row.map(&label_for_position).join(col_separator) }
 
     row_positions = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
-    rows_for_display = row_positions.map(&row_for_display)
+    rows_for_display = row_positions.map(&row_for_position)
     puts "\n#{rows_for_display.join("\n#{row_separator}\n")}\n\n"
   end
 end
