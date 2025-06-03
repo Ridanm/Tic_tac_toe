@@ -1,6 +1,5 @@
 # frozen_string_literal: true
-
-require 'colorize'
+  
 require_relative 'dependencies'
 
 Board.new
@@ -9,11 +8,11 @@ player_two = Player.new
 
 puts Info::WELCOME
 
-puts "\nPlayer one !!!"
+puts "\nPlayer one !!!".blue
 player_one.player_name
 player_one.choose_letter
 
-puts "\nPlayer two !!!"
+puts "\nPlayer two !!!".green
 player_two.player_name
 
 if player_one.letter == 'x'
@@ -23,18 +22,4 @@ else
 end
 
 game = Game.new(player_one, player_two)
-game.select_position!
-
-result = false
-until result
-  print "\nPLAY AGAIN type => yes or any key to exit: ".yellow
-  result = gets.chomp.downcase
-  if result == 'yes'
-    game = Game.new(player_one, player_two)
-    game.select_position!
-    result = false
-  else
-    puts 'Thanks for playing!!!'.green
-    result = true
-  end
-end
+game.play
