@@ -24,13 +24,14 @@ class Game < Board
       position = gets.chomp.to_i
       check_free_position position
       @board.show_board
+      if_winner_or_draw
       game_over if winner? CheckWinner, @player
     end
   end
 
-  def if_winner?
+  def if_winner_or_draw
     if winner? CheckWinner, @player
-     puts Info::show('winner', @player.name)
+      puts Info::show('winner', @player.name)
     elsif board_full? @board.board_data
       puts Info::show('draw')
     end
