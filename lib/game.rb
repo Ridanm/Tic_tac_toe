@@ -16,7 +16,7 @@ class Game < Board
     @num = @board.board_data.size - 1
   end
 
-  def select_position!
+  def play
     @board.show_board
     while @num.positive?
       change_player! @num
@@ -24,16 +24,15 @@ class Game < Board
       position = gets.chomp.to_i
       check_free_position position
       @board.show_board
-
-      if_winner?
+      game_over if winner? CheckWinner, @player
     end
   end
 
   def if_winner?
-    if winner? CHECK_WINNER, @player
-      return puts Info::show('winner', @player.name)
+    if winner? CheckWinner, @player
+     puts Info::show('winner', @player.name)
     elsif board_full? @board.board_data
-      return puts Info::show('draw')
+      puts Info::show('draw')
     end
   end
 
@@ -60,5 +59,21 @@ class Game < Board
 
   def board_full?(board)
     board[1, 9].all? { |pos| pos.is_a?(String) }
+  end
+
+  def game_over(result = false)
+    until result
+      print "\nPLAY AGAIN type => yes or any key to exit: ".yellow
+      result = gets.chomp.downcase
+      if result == 'yes'
+        game = Game.new(player_one, player_two)
+        game.play
+        result = false
+      else
+        puts 'Thanks for playing!!!'.green
+        result = true
+        exit
+      end
+    end
   end
 end
