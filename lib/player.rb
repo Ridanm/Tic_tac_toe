@@ -17,7 +17,7 @@ class Player
   end
 
   def choose_letter
-    print Info::show('enter letter', name)
+    print Info::show('enter_letter', name)
     @letter = gets.chomp.downcase
     choose_letter unless @letter == 'x' || @letter == 'o'
     @letter
