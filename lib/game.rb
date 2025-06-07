@@ -31,9 +31,9 @@ class Game < Board
 
   def if_winner_or_draw
     if winner? CheckWinner, @player
-      puts Info::show('winner', @player.name)
+      puts Info.show('winner', @player.name)
     elsif board_full? @board.board_data
-      puts Info::show('draw')
+      puts Info.show('draw')
     end
   end
 
@@ -62,9 +62,9 @@ class Game < Board
     board[1, 9].all? { |pos| pos.is_a?(String) }
   end
 
-  def game_over(result = false)
+  def game_over(result: false)
     until result
-      print "\nPLAY AGAIN type => yes or any key to exit: ".yellow
+      print Info.show('play_again')
       result = gets.chomp.downcase
       if result == 'yes'
         game = Game.new(player_one, player_two)

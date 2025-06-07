@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-  
+
 require_relative 'dependencies'
 
 Board.new
@@ -15,11 +15,11 @@ player_one.choose_letter
 puts "\nPlayer two !!!".green
 player_two.player_name
 
-if player_one.letter == 'x'
-  player_two.letter = 'o'
-else
-  player_two.letter = 'x'
-end
+player_two.letter = if player_one.letter == 'x'
+                      'o'
+                    else
+                      'x'
+                    end
 
 game = Game.new(player_one, player_two)
 game.play

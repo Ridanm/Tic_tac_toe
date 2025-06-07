@@ -13,7 +13,8 @@ module Info
       'winner' => "\n  ---  Congratulations #{name} is the winner!!!  ---".green,
       'draw' => "\n  ---  Is a draw!!!  ---".green,
       'free_position' => "#{name.green} select a free position in the board: ",
-      'enter_letter' => "\n#{name.blue} enter the letter you want to play with it can be: X or: O => "
+      'enter_letter' => "\n#{name.blue} enter the letter you want to play with it can be: X or: O => ",
+      'play_again' => "\nPLAY AGAIN type => yes or any key to exit: ".yellow
     }[parameter]
   end
 end

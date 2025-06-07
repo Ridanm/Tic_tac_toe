@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative './dependencies'
+require_relative 'dependencies'
 
 # This class implements the player and the choice of the letter to play
 class Player
@@ -17,7 +17,7 @@ class Player
   end
 
   def choose_letter
-    print Info::show('enter_letter', name)
+    print Info.show('enter_letter', name)
     @letter = gets.chomp.downcase
     choose_letter unless @letter == 'x' || @letter == 'o'
     @letter
