@@ -19,7 +19,7 @@ class Game < Board
   def play
     @board.show_board
     while @num.positive?
-      change_player! @num
+      current_player! @num
       print Info.show('free_position', @player.name)
       position = gets.chomp.to_i
       check_free_position position
@@ -37,7 +37,7 @@ class Game < Board
     end
   end
 
-  def change_player!(num)
+  def current_player!(num)
     @player = num
     @player = @player.odd? ? @player_one : @player_two
   end
