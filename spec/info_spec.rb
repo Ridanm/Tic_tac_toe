@@ -16,14 +16,14 @@ RSpec.describe Info do
     end
 
     it 'is yellow end_with' do
-      expect(Info::WELCOME).to end_with("[0m")
+      expect(Info::WELCOME).to end_with('[0m')
     end
   end
 
   describe 'CheckWimner comstant' do
     it 'contains the winning combinations' do
       expected = [
-        [1, 2 ,3], [4, 5, 6], [7, 8,9],
+        [1, 2, 3], [4, 5, 6], [7, 8, 9],
         [1, 4, 7], [2, 5, 8], [3, 6, 9],
         [1, 5, 9], [3, 5, 7]
       ]
@@ -36,30 +36,29 @@ RSpec.describe Info do
 
     describe '#show' do
       context 'when the parameter is free_position' do
-
         it 'when the parameter is filled' do
           message_filled = "\nThath position is already filled, or the character does not match...".light_red
-          expect(Info::show('filled', name)).to eq(message_filled)
+          expect(Info.show('filled', name)).to eq(message_filled)
         end
 
         it 'when the parameter is winner' do
           message_winner = "\n  ---  Congratulations #{name} is the winner!!!  ---".green
-          expect(Info::show('winner', name)).to eq(message_winner)
+          expect(Info.show('winner', name)).to eq(message_winner)
         end
 
         it 'when the parameter is draw' do
           message_draw = "\n  ---  Is a draw!!!  ---".green
-          expect(Info::show('draw', name)).to eq(message_draw)
+          expect(Info.show('draw', name)).to eq(message_draw)
         end
 
         it 'returns the formatted message with the name in green' do
           message = Info.show('free_position', 'Rob')
-          expect(message).to eq('Rob'.green + ' select a free position in the board: ')
+          expect(message).to eq("#{'Rob'.green} select a free position in the board: ")
         end
 
         it 'when the parameter is enter_letter' do
           message_enter_letter = "\n#{name.blue} enter the letter you want to play with it can be: X or: O => "
-          expect(Info::show('enter_letter', name)).to eq(message_enter_letter)
+          expect(Info.show('enter_letter', name)).to eq(message_enter_letter)
         end
       end
     end
