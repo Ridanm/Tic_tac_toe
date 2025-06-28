@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'dependencies'
+require 'pry-byebug'
 
 # This class implements player swapping and determines the winner if there is one.
 class Game < Board
@@ -14,6 +15,7 @@ class Game < Board
     @player_two = player_two
     @board = Board.new
     @num = @board.board_data.size - 1
+    @player = current_player! num
   end
 
   def play
