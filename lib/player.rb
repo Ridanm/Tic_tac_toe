@@ -4,7 +4,7 @@ require_relative 'dependencies'
 
 # This class implements the player and the choice of the letter to play
 class Player
-  attr_reader :name
+  attr_accessor :name
   attr_accessor :letter
 
   include Info
