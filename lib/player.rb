@@ -4,15 +4,14 @@ require_relative 'dependencies'
 
 # This class implements the player and the choice of the letter to play
 class Player
-  attr_accessor :name
-  attr_accessor :letter
+  attr_accessor :name, :letter
 
   include Info
 
-  def player_name
+  def enter_name
     print 'Enter your name: '
-    @name = gets.chomp.capitalize.strip.squeeze
-    player_name if @name == '' || @name == ' '
+    @name = gets.chomp.capitalize.strip.squeeze(' ')
+    enter_name if @name == '' || @name == ' '
     @name
   end
 
