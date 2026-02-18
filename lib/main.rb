@@ -9,11 +9,11 @@ player_two = Player.new
 puts Info::WELCOME
 
 puts "\nPlayer one !!!".blue
-player_one.player_name
+player_one.enter_name
 player_one.choose_letter
 
 puts "\nPlayer two !!!".green
-player_two.player_name
+player_two.enter_name
 
 player_two.letter = if player_one.letter == 'x'
                       'o'
