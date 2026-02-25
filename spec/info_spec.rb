@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
-require './lib/dependencies'
+require '../lib/dependencies'
 
 RSpec.describe Info do
   let(:name) { 'Rob' }
+  let(:expected) { [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]] }
 
   describe 'WELCOME message' do
     it 'contains the correct message' do
@@ -22,11 +23,6 @@ RSpec.describe Info do
 
   describe 'CheckWimner comstant' do
     it 'contains the winning combinations' do
-      expected = [
-        [1, 2, 3], [4, 5, 6], [7, 8, 9],
-        [1, 4, 7], [2, 5, 8], [3, 6, 9],
-        [1, 5, 9], [3, 5, 7]
-      ]
       expect(Info::CheckWinner).to eq(expected)
     end
 
@@ -35,18 +31,18 @@ RSpec.describe Info do
     end
 
     describe '#show' do
-      context 'when the parameter is free_position' do
-        it 'when the parameter is filled' do
+      context 'when the parameter' do
+        it 'is occupied' do
           message_filled = "\nThath position is already filled, or the character does not match...".light_red
           expect(Info.show('filled', name)).to eq(message_filled)
         end
 
-        it 'when the parameter is winner' do
+        it 'is winner' do
           message_winner = "\n  ---  Congratulations #{name} is the winner!!!  ---".green
           expect(Info.show('winner', name)).to eq(message_winner)
         end
 
-        it 'when the parameter is draw' do
+        it 'is draw' do
           message_draw = "\n  ---  Is a draw!!!  ---".green
           expect(Info.show('draw', name)).to eq(message_draw)
         end
@@ -56,7 +52,7 @@ RSpec.describe Info do
           expect(message).to eq("#{'Rob'.green} select a free position in the board: ")
         end
 
-        it 'when the parameter is enter_letter' do
+        it 'is enter_letter' do
           message_enter_letter = "\n#{name.blue} enter the letter you want to play with it can be: X or: O => "
           expect(Info.show('enter_letter', name)).to eq(message_enter_letter)
         end
