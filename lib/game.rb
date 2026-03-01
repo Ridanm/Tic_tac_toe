@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require_relative 'dependencies'
-require 'pry-byebug'
 
 # This class implements player swapping and determines the winner if there is one.
 class Game < Board
@@ -36,6 +35,7 @@ class Game < Board
       puts Info.show('winner', @player.name)
     elsif board_full? @board.board_data
       puts Info.show('draw')
+      game_over
     end
   end
 
@@ -64,18 +64,24 @@ class Game < Board
     board[1, 9].all? { |pos| pos.is_a?(String) }
   end
 
+  def repeat_game
+    game = Game.new(player_one, player_two)
+    game.play
+  end
+
+  def continue_or_exit
+    gets.chomp.downcase
+  end
+
   def game_over(result: false)
     until result
       print Info.show('play_again')
-      result = gets.chomp.downcase
+      result = continue_or_exit
       if result == 'yes'
-        game = Game.new(player_one, player_two)
-        game.play
-        result = false
+        repeat_game
       else
         puts 'Thanks for playing!!!'.green
-        result = true
-        exit
+        exit if result == true
       end
     end
   end
