@@ -81,7 +81,8 @@ class Game < Board
         repeat_game
       else
         puts 'Thanks for playing!!!'.green
-        exit if result == true
+        result = true
+        exit
       end
     end
   end
