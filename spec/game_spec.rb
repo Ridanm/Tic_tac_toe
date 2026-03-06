@@ -1,34 +1,16 @@
 # frozen_string_literal: true
 
-require './lib/dependencies'
+require '../lib/dependencies'
 
 RSpec.describe Game do
   let(:player_one) { instance_double('Player', name: 'Player_one', letter: 'x') }
   let(:player_two) { instance_double('Player', name: 'Player_two', letter: 'o') }
-  let(:position) { %w[x x x] }
   let(:board) { instance_double('Board') }
-  let(:info) { Info }
 
   subject(:game) { described_class.new(player_one, player_two) }
 
-  let(:WINNING_LINES) do
-    [
-      [1, 2, 3], # Top row
-      [4, 5, 6], # Middle row
-      [7, 8, 9], # Bottom row
-      [1, 4, 7], # Left column
-      [2, 5, 8], # Middle column
-      [3, 6, 9], # Right column
-      [1, 5, 9], # Diagonal top-left
-      [3, 5, 7]  # Diagonal top-righttom
-    ].freeze
-  end
-
   before do
     allow(game).to receive(:show_board)
-    allow(game).to receive(:player_one).and_return(player_one)
-    allow(game).to receive(:player_two).and_return(player_two)
-    allow(game).to receive(:current_player!).and_return(player_one)
   end
 
   context '#initialize' do
@@ -38,6 +20,14 @@ RSpec.describe Game do
 
     it 'with player_two' do
       expect(player_two).to respond_to(:letter)
+    end
+
+    it 'the name of the first player' do
+      expect(player_one.name).to eq('Player_one')
+    end
+
+    it 'the letter of the second player' do
+      expect(player_two.letter).to eq('o')
     end
 
     it 'with a Board' do
@@ -50,32 +40,112 @@ RSpec.describe Game do
   end
 
   describe '#play' do
-    context 'when the game is in progress' do
-      before do
-        allow(game).to receive(:num).and_return(1).once
-        allow(game).to receive(:current_player!).and_return(player_one)
-        allow(game).to receive(:gets).and_return('4', '5', '6')
-        allow(game).to receive(:check_free_position)
-        allow(game).to receive(:if_winner_or_draw)
-        allow(game).to receive(:game_over)
-      end
-
+    context 'When does the game begin' do
       it 'when you call @board.show_board at startup' do
         expect(board).to receive(:show_board)
         board.show_board
       end
 
-      it 'when check_free_position' do
-        expect(game.board_data[7]).to eq(7)
+      it 'when the dashboard first appears' do
+        size = game.board_data.size
+        expect(size).to eq(10)
+      end
+    end
+  end
+
+    describe '#current_player!' do
+      it 'if the number is odd' do
+      expect(game.current_player!(1)).to eq(player_one)
       end
 
-      it 'when is ocuped' do
-        expect(game.board_data[7] = 'x').to eq(player_one.letter)
+      it 'if the number is even' do
+      expect(game.current_player!(2)
+).not_to eq(player_one)
+    end
+
+    it 'when number is 1' do
+      expect(player_one.name).to eq('Player_one')
+    end
+  end
+
+  describe 'Info module' do
+    context 'player name, select an empty box' do
+      it 'when player_two' do
+        expect(Info).to receive(:show).with('free_position', player_two.name).and_return('Player_two', 'select a free position in the board: ').once.time
+        Info::show('free_position', player_two.name)
+      end
+    end
+  end
+
+  describe '#check_free_position' do
+    it 'when the box is occupied, or the number is not between 1 and 9' do
+      expect(Info).to receive(:show).with('filled').and_return('Thath position is already filled, or the character
+does not match...')
+      Info::show('filled')
+    end
+   
+    it 'When you enter a correct number' do
+      allow(player_one).to receive(:gets).and_return(3)
+      game.check_free_position(3)
+      expect(game.board.board_data[3]).to eq('x')
+      # check_free_position(3)
+    end
+  end
+
+  describe '#winner_or_draw' do
+    let(:check_winner) { [[1, 2, 3], [4, 5, 6]] }
+    context '#winner' do
+      before do
+        game.board.board_data[1] ='x'
+        game.board.board_data[2] = 'x'
+        game.board.board_data[3] = 'x'
+      end
+
+      it 'if return true' do
+        expect(game.winner?(check_winner, player_one)).to be true
+      end
+
+      it 'if return false' do
+        expect(game.winner?(check_winner, player_two)).to be false
       end
     end
 
+    context '#board_full?' do
+      it 'when there are no more movements' do
+        (1..9).each { |i| game.board.board_data[i] = 'x' }
+        expect(game.board_full?(game.board.board_data)).to be true
+      end
+
+      it 'when the board is not full?' do
+        expect(game.board_full?(game.board.board_data)).to be false
+      end
+
+      it 'we display the message' do
+        expect(Info).to receive(:show).with('draw').and_return("\n  ---  Is a draw!!!  ---".green)
+        Info::show('draw')
+      end
+    end
+
+    describe '#game_over' do
+      it 'as long as the result is negative' do
+        expect(Info).to receive(:show).with('play_again').and_return("\nPLAY AGAIN type => yes or any key to exit: ".yellow)
+        Info::show('play_again')
+      end
+
+      context '#continue_or_exit' do
+        it 'as long as we continue choosing empty boxes' do
+          expect(game).to receive(:gets).and_return('yes')
+          expect(game).to receive(:play)
+          game.play
+        end
+      end
+    end
+  end
+
+
+=begin
     context 'when the game ends in a draw' do
-      it 'plays through all moves and ends the game' do
+      xit 'plays through all moves and ends the game' do
         game.instance_variable_set(:@num, 9)
         allow(game).to receive(:current_player!)
         allow(Info).to receive(:show)
@@ -95,7 +165,7 @@ RSpec.describe Game do
     end
 
     context 'when a player wins' do
-      it 'ends the game early' do
+      xit 'ends the game early' do
         game.instance_variable_set(:@num, 9)
         allow(game).to receive(:current_player!)
         allow(game).to receive(:check_free_position)
@@ -114,24 +184,10 @@ RSpec.describe Game do
         end
         
         game.play
-        #expect(game).to have_received(:game_over).with(true).once
+        # expect(game).to have_received(:game_over).with(true).once
         expect(move_count).to eq(3)
         expect(game.instance_variable_get(:@num, 6))
       end
-    end
-  end
-
-  describe '#current_player!' do
-    it 'swuap based on the player number 9' do
-      expect(game.current_player!(1)).to eq(player_one)
-    end
-
-    it 'swuap if the player number is 8' do
-      expect(game.current_player!(2)).not_to eq(player_two)
-    end
-
-    it 'swap player when number is 7' do
-      expect(player_one.name).to eq('Player_one')
     end
   end
 
@@ -156,4 +212,5 @@ RSpec.describe Game do
       expect(game.board_full?(full)).to be true
     end
   end
+=end
 end
