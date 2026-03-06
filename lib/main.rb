@@ -21,5 +21,6 @@ player_two.letter = if player_one.letter == 'x'
                       'x'
                     end
 
+
 game = Game.new(player_one, player_two)
 game.play
