@@ -88,7 +88,6 @@ does not match...')
       allow(player_one).to receive(:gets).and_return(3)
       game.check_free_position(3)
       expect(game.board.board_data[3]).to eq('x')
-      # check_free_position(3)
     end
   end
 
@@ -133,7 +132,7 @@ does not match...')
       end
 
       context '#continue_or_exit' do
-        it 'When does it end, do we repeat the game or not?' do
+        it 'When the game ends and we repeat it' do
           expect(game).to receive(:gets).and_return('yes')
           game.continue_or_exit
         end
@@ -145,78 +144,13 @@ does not match...')
           game.play
         end
       end
-    end
-  end
-
-
-=begin
-    context 'when the game ends in a draw' do
-      xit 'plays through all moves and ends the game' do
-        game.instance_variable_set(:@num, 9)
-        allow(game).to receive(:current_player!)
-        allow(Info).to receive(:show)
-        allow(game).to receive(:if_winner_or_draw)
-        allow(game).to receive(:winner?).and_return(false)
-        allow(game).to receive(:gets).and_return('1', '2', '3', '4', '5', '6', '7', '8', '9')
-        num = 9
-        allow(game).to receive(:check_free_position) do
-          num -= 1
-          game.instance_variable_set(:@num, num)
+      
+      context 'exiting the game' do
+        it 'When the game ends and we leave' do
+          expect(game).to receive(:game_over).and_return('Thanks for playing!!!')
+          game.game_over
         end
-
-        game.play
-        expect(game).to have_received(:current_player!).exactly(9).times
-        expect(game.instance_variable_get(:@num)).to eq(0)
-      end
-    end
-
-    context 'when a player wins' do
-      xit 'ends the game early' do
-        game.instance_variable_set(:@num, 9)
-        allow(game).to receive(:current_player!)
-        allow(game).to receive(:check_free_position)
-        move_count = 0
-        allow(game).to receive(:winner?).and_wrap_original do
-          move_count += 1
-          move_count == 3
-        end
-        allow(game).to receive(:game_over)
-        allow(game).to receive(:gets).and_return('1', '2', '3')
-        num = 9
-        allow(game.instance_variable_set(:@num, num))
-        allow(game).to receive(:check_free_position) do
-        num -= 1
-        game.instance_variable_set(:@num, num)
-        end
-        
-        game.play
-        # expect(game).to have_received(:game_over).with(true).once
-        expect(move_count).to eq(3)
-        expect(game.instance_variable_get(:@num, 6))
       end
     end
   end
-
-  context '#winner' do
-    xit 'when there are three consecutive symbols in a line' do
-      expect(position.all?(player_one.letter)).to be true
-    end
-
-    xit 'when the three letters are not consecutives' do
-      expect(position.all?(player_two.letter)).to_not be true
-    end
-  end
-
-  context '#board full' do
-    xit 'after 7 turns' do
-      full = [0, '1', '2', '3', '4', '5', '6', '7', 8, 9]
-      expect(game.board_full?(full)).to be false
-    end
-
-    xit 'after 9 turns all numbers in the board are letters' do
-      full = [0, 'x', '0', 'x', '0', 'x', '0', 'x', 'x', 'x']
-      expect(game.board_full?(full)).to be true
-    end
-  end
-=end
 end
