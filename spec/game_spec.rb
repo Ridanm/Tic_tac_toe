@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require '../lib/dependencies'
+require './shared_examples/game_over_behavior.rb'
 
 RSpec.describe Game do
   let(:player_one) { instance_double('Player', name: 'Player_one', letter: 'x') }
@@ -125,16 +126,22 @@ does not match...')
         Info::show('draw')
       end
     end
-
+ 
     describe '#game_over' do
-      it 'as long as the result is negative' do
+      it 'while the game is running' do
         expect(Info).to receive(:show).with('play_again').and_return("\nPLAY AGAIN type => yes or any key to exit: ".yellow)
         Info::show('play_again')
       end
 
       context '#continue_or_exit' do
-        it 'as long as we continue choosing empty boxes' do
+        it 'When does it end, do we repeat the game or not?' do
           expect(game).to receive(:gets).and_return('yes')
+          game.continue_or_exit
+        end
+      end
+
+      context '#repeat_game' do
+        it 'when you want to repeat the game' do
           expect(game).to receive(:play)
           game.play
         end
