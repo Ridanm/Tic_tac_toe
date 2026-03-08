@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require '../lib/dependencies'
-require './shared_examples/game_over_behavior.rb'
 
 RSpec.describe Game do
   let(:player_one) { instance_double('Player', name: 'Player_one', letter: 'x') }
