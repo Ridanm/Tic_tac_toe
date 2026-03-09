@@ -3,13 +3,16 @@
 require '../lib/dependencies'
 
 RSpec.describe Player do
-  let(:player) { described_class.new }
-  before(:each) do
+  subject(:player) { described_class.new }
+  let(:enter_letter_msj) { '\nJose enter the letter you want to play with it can be: X or: O =>' }
+
+  before do
+    allow(player).to receive(:print)
     allow(player).to receive(:gets).and_return('jose')
-    allow(Info).to receive(:show).with('enter_letter', player.name).and_return('\nJose enter the letter you want to play with it can be: X or: O =>')
+    allow(Info).to receive(:show).with('enter_letter', player.name).and_return(enter_letter_msj)
   end
 
-  context 'when #enter_name#' do
+  describe '#enter_name#' do
     it 'returns the first letter in uppercase' do
       player.enter_name
       expect(player.name).to start_with('J')
@@ -28,7 +31,7 @@ RSpec.describe Player do
     end
   end
 
-  context 'when #coose_letter' do
+  describe '#coose_letter' do
     it 'x to play' do
       expect(player).to receive(:gets).and_return('x')
       player.choose_letter
