@@ -29,33 +29,33 @@ RSpec.describe Info do
     it 'is frozen' do
       expect(Info::CheckWinner).to be_frozen
     end
+  end
 
-    describe '#show' do
-      context 'when the parameter' do
-        it 'is occupied' do
-          message_filled = "\nThath position is already filled, or the character does not match...".light_red
-          expect(Info.show('filled', name)).to eq(message_filled)
-        end
+  describe '#show' do
+    context 'when the parameter' do
+      it 'is occupied' do
+        message_filled = "\nThath position is already filled, or the character does not match...".light_red
+        expect(Info.show('filled', name)).to eq(message_filled)
+      end
 
-        it 'is winner' do
-          message_winner = "\n  ---  Congratulations #{name} is the winner!!!  ---".green
-          expect(Info.show('winner', name)).to eq(message_winner)
-        end
+      it 'is winner' do
+        message_winner = "\n  ---  Congratulations #{name} is the winner!!!  ---".green
+        expect(Info.show('winner', name)).to eq(message_winner)
+      end
 
-        it 'is draw' do
-          message_draw = "\n  ---  Is a draw!!!  ---".green
-          expect(Info.show('draw', name)).to eq(message_draw)
-        end
+      it 'is draw' do
+        message_draw = "\n  ---  Is a draw!!!  ---".green
+        expect(Info.show('draw', name)).to eq(message_draw)
+      end
 
-        it 'returns the formatted message with the name in green' do
-          message = Info.show('free_position', 'Rob')
-          expect(message).to eq("#{'Rob'.green} select a free position in the board: ")
-        end
+      it 'returns the formatted message with the name in green' do
+        message = Info.show('free_position', 'Rob')
+        expect(message).to eq("#{'Rob'.green} select a free position in the board: ")
+      end
 
-        it 'is enter_letter' do
-          message_enter_letter = "\n#{name.blue} enter the letter you want to play with it can be: X or: O => "
-          expect(Info.show('enter_letter', name)).to eq(message_enter_letter)
-        end
+      it 'is enter_letter' do
+        message_enter_letter = "\n#{name.blue} enter the letter you want to play with it can be: X or: O => "
+        expect(Info.show('enter_letter', name)).to eq(message_enter_letter)
       end
     end
   end
