@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 require '../lib/dependencies'
 
-RSpec.describe Board do 
+RSpec.describe Board do
   subject(:board) { Board.new }
   let(:data) { board.board_data }
   let(:game) { instance_double('Game') }
   let(:player) { instance_double('Player') }
-        
+
   describe '#initialize' do
     it 'when instantiating the class' do
       expect(data).to be_a(Array)
@@ -15,7 +17,7 @@ RSpec.describe Board do
       expect(data.size).to eq(10)
     end
 
-    it 'does it include the numbers?' do 
+    it 'does it include the numbers?' do
       expect(data).to include(1..9)
     end
   end
@@ -23,7 +25,7 @@ RSpec.describe Board do
   describe '#show_board' do
     it 'the board at the start' do
       expected_output = "\n1 | 2 | 3\n--+---+--\n4 | 5 | 6\n--+---+--\n7 | 8 | 9\n\n"
-      expect{ board.show_board }.to output{expected_output}.to_stdout
+      expect { board.show_board }.to output { expected_output }.to_stdout
     end
 
     it 'when a player selects box 2' do
